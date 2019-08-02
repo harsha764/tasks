@@ -1,11 +1,11 @@
 import React from 'react';
-import Page from 'components/Page';
+import Page from '../../Breadcrumbs/Page';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { backendActions } from '../helpers/ApiRequest';
+import { backendActions } from '../../../helpers/ApiRequest';
 import { withRouter } from 'react-router';
 import swal from 'sweetalert';
 
-class createUser extends React.Component{
+class CreateUser extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -56,11 +56,11 @@ class createUser extends React.Component{
             <Form onSubmit={this.handleSubmit} className="mt-3">    
                 <FormGroup>
                     <Label for="username">Username</Label>
-                    <Input onChange={this.changeEvent} name="username" />
+                    <Input onChange={this.changeEvent} name="username" value={this.state.username} />
                 </FormGroup>
                 <FormGroup>
                     <Label for="password">Password</Label>
-                    <Input onChange={this.changeEvent} name="password" />
+                    <Input onChange={this.changeEvent} name="password" value={this.state.password}/>
                 </FormGroup>
                 <FormGroup className="text-center" style={{ color: 'red' }}>
                     <p>{this.state.errors}</p>
@@ -78,4 +78,4 @@ class createUser extends React.Component{
     }
 }
 
-export default withRouter(createUser);
+export default withRouter(CreateUser);

@@ -3,7 +3,6 @@ import sidebarBgImage from 'assets/img/sidebar/sidebar-4.jpg';
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 import {
-  MdAccountCircle,
   MdDashboard,
   MdKeyboardArrowDown,
   MdPages,
@@ -24,14 +23,14 @@ const sidebarBackground = {
   backgroundRepeat: 'no-repeat',
 };
 
-// const pageContents = [
-//   { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
-// ];
+const pageContents = [
+  { to: '/dashboard/create_user', name: 'Create User', exact: true, Icon: MdDashboard },
+  { to: '/dashboard/view_user', name: 'View Users', exact: true, Icon: MdDashboard },
+];
 
 const navItems = [
   { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-  { to: '/dashboard/create_user', name: 'Create User', exact: true, Icon: MdDashboard },
-  { to: '/dashboard/view_user', name: 'View Users', exact: true, Icon: MdDashboard },
+ 
 ];
 
 const bem = bn.create('sidebar');
@@ -39,13 +38,12 @@ const bem = bn.create('sidebar');
 class Sidebar extends React.Component {
   state = {
     // isOpenComponents: false,
-    isOpenPages: true,
+    isOpenPages: false,
   };
 
   handleClick = name => () => {
     this.setState(prevState => {
       const isOpen = prevState[`isOpen${name}`];
-
       return {
         [`isOpen${name}`]: !isOpen,
       };
@@ -90,14 +88,14 @@ class Sidebar extends React.Component {
 
            
 
-            {/* <NavItem
+            <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Pages')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
                   <MdPages className={bem.e('nav-item-icon')} />
-                  <span className="">Pages</span>
+                  <span className="">USER ACTIONS</span>
                 </div>
                 <MdKeyboardArrowDown
                   className={bem.e('nav-item-icon')}
@@ -128,7 +126,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse> */}
+            </Collapse>
           </Nav>
         </div>
       </aside>

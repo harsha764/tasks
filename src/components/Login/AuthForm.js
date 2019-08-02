@@ -2,7 +2,7 @@ import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { backendActions } from '../helpers/ApiRequest';
+import { backendActions } from '../../helpers/ApiRequest';
 import { withRouter } from 'react-router';
 
 class AuthForm extends React.Component {
@@ -134,12 +134,6 @@ class AuthForm extends React.Component {
         <FormGroup className="text-center" style={{ color: 'red' }}>
           <p>{this.state.errors}</p>
         </FormGroup>
-        {/* <FormGroup check>
-          <Label check>
-            <Input type="checkbox" />{' '}
-            {this.isSignup ? 'Agree the terms and policy' : 'Remember me'}
-          </Label>
-        </FormGroup> */}
         <hr />
         <Button
           size="lg"

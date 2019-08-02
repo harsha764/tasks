@@ -1,4 +1,4 @@
-import AuthForm, { STATE_LOGIN } from 'components/AuthForm';
+import AuthForm, { STATE_LOGIN } from 'components/Login/AuthForm';
 import React from 'react';
 import { Card, Col, Row } from 'reactstrap';
 
@@ -43,6 +43,7 @@ checkingAuth = () =>{
           height: '100vh',
           justifyContent: 'center',
           alignItems: 'center',
+          width: '100%'
         }}>
         <Col md={6} lg={4}>
           <Card body>

@@ -18,9 +18,7 @@ class MainLayout extends React.Component {
     this.checkBreakpoint(this.props.breakpoint);
   }
    
-  // close sidebar when
   handleContentClick = event => {
-    // close sidebar if sidebar is open and screen size is less than `md`
     if (
       MainLayout.isSidebarOpen() &&
       (this.props.breakpoint === 'xs' ||

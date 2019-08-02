@@ -1,10 +1,10 @@
 import React from 'react';
-import Page from 'components/Page';
-import { backendActions } from '../helpers/ApiRequest';
+import Page from '../../Breadcrumbs/Page';
+import { backendActions } from '../../../helpers/ApiRequest';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router';
 
-class viewUser extends React.Component{
+class ViewUser extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -147,4 +147,4 @@ class viewUser extends React.Component{
 
 }
 
-export default withRouter(viewUser);
+export default withRouter(ViewUser);

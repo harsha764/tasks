@@ -1,6 +1,6 @@
-import Avatar from 'components/Avatar';
+import Avatar from 'components/Pages/Avatar';
 import { UserCard } from 'components/Card';
-import SearchInput from 'components/SearchInput';
+import SearchInput from 'components/Pages/SearchInput';
 import React from 'react';
 import { withRouter } from 'react-router';
 

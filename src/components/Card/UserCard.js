@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { Card, CardTitle, CardSubtitle, CardText, CardBody } from 'reactstrap';
 
-import Avatar from '../Avatar';
+import Avatar from '../Pages/Avatar';
 
 const UserCard = ({
   avatar,
