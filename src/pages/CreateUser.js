@@ -1,7 +1,7 @@
 import React from 'react';
 import Page from 'components/Page';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { postData } from '../helpers/ApiRequest';
+import { backendActions } from '../helpers/ApiRequest';
 import { withRouter } from 'react-router';
 import swal from 'sweetalert';
 
@@ -24,17 +24,24 @@ class createUser extends React.Component{
     handleSubmit = event => {
         event.preventDefault();
         let url;
-        var data = {};
+        var data = {};        
+        let methodType;
+
         data.username = this.state.username;
         data.password = this.state.password;
         data.type = 'signup';
-        url = 'http://localhost:80/react_project_backend/signup.php';
-        postData(url, data)
+        methodType = 'POST';
+        url = '/signup.php';
+        backendActions(url, methodType,data)
           .then((data) => {
             swal({
                 icon: "success",
                 title: "User Created Sucessfully"
             });
+            this.setState({
+                username:'',
+                password:''
+            })
           })
           .catch(error => console.error(error));
       };

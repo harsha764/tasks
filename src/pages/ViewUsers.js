@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from 'components/Page';
-import { postData } from '../helpers/ApiRequest';
+import { backendActions } from '../helpers/ApiRequest';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router';
 
@@ -14,8 +14,11 @@ class viewUser extends React.Component{
     }
     componentWillMount(){
         let url;
-        url = 'http://localhost:80/react_project_backend/get_users.php';
-        postData(url)
+        let methodType;
+        methodType = 'POST';
+
+        url = '/get_users.php';
+        backendActions(url,methodType)
           .then((res) => {
             if(res !== null){
                 let usersdata = res;
@@ -25,78 +28,82 @@ class viewUser extends React.Component{
             }else{
                 console.warn("No data found");     
             }
-
-            
           })
           .catch(error => console.error(error));
 
 
-        // ApiService.getUsers()
-        //     .then((res) => {
-        //             if(res !== null){
-        //                 let usersdata = res;
-        //                 this.setState({
-        //                     users:usersdata
-        //                 })
-        //             }else{
-        //                 console.warn("No data found");     
-        //             }
-        //     })
-        //     .catch((err) => {
-        //         console.log('Get Users api error, ', err);
-        //     })  
+      
     }
+    removeUser = (userid) =>{
+        let url;
+        let methodType;
+        let data={};
+        data.id = userid;
+        url = '/delete_user.php';
+        methodType = 'POST';
 
-    // removeUser = (userid) =>{
-    //     swal({
-    //         title: "Are u sure?",
-    //         text: "You want are u want delete!",
-    //         icon: "warning",
-    //         buttons: {
-    //             cancel: {
-    //                 text: "Cancel",
-    //                 value: null,
-    //                 visible: true,
-    //                 className: "",
-    //                 closeModal: true,
-    //             },
-    //             confirm: {
-    //                 text: "Delete",
-    //                 value: true,
-    //                 visible: true,
-    //                 className: "",
-    //                 closeModal: true
-    //             }
-    //         }
+        backendActions(url,methodType,data)
+          .then((res) => {
+            if(res.data !== null){
+                this.setState({
+                    users:res.users
+                })
 
-    //     })
+                swal({
+                    title: "User Deleted Sucessfully",
+                    icon: "success",
+                });
+                // swal(res.data)
+            }else{
+                swal({
+                    title: res.data,
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                })
+            }
+          })
+          .catch(error => console.error(error));
 
-        // let url;
-        // let data={};
-        // data.id = userid;
-        // url = 'http://localhost:80/react_project_backend/delete_user.php';
-        // postData(url,data)
-        //   .then((res) => {
-        //     if(res.data !== null){
-        //         this.setState({
-        //             users:res.users
-        //         })
-        //         swal(res.data)
-        //     }else{
-        //         swal(res.data)
-        //     }
-        //   })
-        //   .catch(error => console.error(error));
-
-    // }
-
-    confiramtionPopup = (id) => {
+    }
         
-        swal("Are you sure?", {
-            dangerMode: true,
+    confiramtionPopup = (id) => {
+        swal({
+            title: "Are you sure ??",
+            icon: "warning",
             buttons: true,
-          });
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.removeUser(id);
+          } 
+        });
     }    
+
+    viewUser = (userid) =>{
+        let url;
+        let methodType;
+        let data={};
+        data.id = userid;
+        url = '/view_user.php';
+        methodType = 'POST';
+
+        backendActions(url,methodType,data)
+          .then((res) => {
+            if(res.data !== null){
+                console.log(res.data);
+            }else{
+                swal({
+                    title: res.data,
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                })
+            }
+          })
+          .catch(error => console.error(error));
+    }   
 
 
     render(){
@@ -129,7 +136,7 @@ class viewUser extends React.Component{
                         <td>{i+1}</td>    
                         <td >{item.id}</td>
                         <td>{item.name}</td>
-                        <td className="actionbtn"><button className="btn btn-info" onClick={()=>this.viewUser(item.id)}>View</button> <button className="btn btn-danger" onClick={()=>this.removeUser(item.id)}>Delete</button></td>
+                        <td className="actionbtn"><button className="btn btn-info" onClick={()=>this.viewUser(item.id)}>View</button> <button className="btn btn-danger" onClick={()=>this.confiramtionPopup(item.id)}>Delete</button></td>
                     </tr>
                 ))}
                 </tbody>

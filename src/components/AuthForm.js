@@ -2,7 +2,7 @@ import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { postData } from '../helpers/ApiRequest';
+import { backendActions } from '../helpers/ApiRequest';
 import { withRouter } from 'react-router';
 
 class AuthForm extends React.Component {
@@ -31,20 +31,24 @@ class AuthForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     let url;
+    let methodType;
+
     var data = {};
 
     if (this.isLogin) {
+      methodType = 'POST';
       data.username = this.state.username;
       data.password = this.state.password;
-      url = 'http://localhost:80/react_project_backend/userauth.php';
+      url = '/userauth.php';
 
     } else {
+      methodType = 'POST';
       data.username = this.state.username;
       data.password = this.state.password;
       data.type = 'signup';
-      url = 'http://localhost:80/react_project_backend/signup.php';
+      url = '/signup.php';
     }
-    postData(url, data)
+    backendActions(url,methodType, data)
       .then((data) => {
         var status = data.status;
         if (data.type === 'login') {
