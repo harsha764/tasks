@@ -1,6 +1,6 @@
 import React from 'react';
-import Page from '../../Breadcrumbs/Page';
-import { backendActions } from '../../../helpers/ApiRequest';
+import Page from '../../../Breadcrumbs/Page';
+import { backendActions } from '../../../../helpers/ApiRequest';
 import swal from 'sweetalert';
 import { withRouter } from 'react-router';
 

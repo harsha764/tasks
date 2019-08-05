@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'utils/propTypes';
-
 import classNames from 'classnames';
-
 import userImage from 'assets/img/users/100_4.jpg';
 
 const Avatar = ({

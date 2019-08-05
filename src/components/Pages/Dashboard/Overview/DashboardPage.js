@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from '../../Breadcrumbs/Page';
+import Page from '../../../Breadcrumbs/Page';
 import { withRouter } from 'react-router';
 
 

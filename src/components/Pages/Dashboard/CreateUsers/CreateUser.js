@@ -1,7 +1,7 @@
 import React from 'react';
-import Page from '../../Breadcrumbs/Page';
+import Page from '../../../Breadcrumbs/Page';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { backendActions } from '../../../helpers/ApiRequest';
+import { backendActions } from '../../../../helpers/ApiRequest';
 import { withRouter } from 'react-router';
 import swal from 'sweetalert';
 
