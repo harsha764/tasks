@@ -1,6 +1,7 @@
 import React from 'react';
 import Page from '../../Breadcrumbs/Page';
 import { backendActions } from '../../../helpers/ApiRequest';
+import swal from 'sweetalert';
 
 class MyCompanies extends React.Component{
     constructor(props){
@@ -43,6 +44,49 @@ class MyCompanies extends React.Component{
         console.log(id);
         this.props.history.push('/dashboard/company/'+id);
     }
+
+    removeCompany = (id) =>{
+        let url;
+        let methodType;
+        let data={};
+        data.id = id;
+        url = '/delete_company.php';
+        methodType = 'POST';
+
+        backendActions(url,methodType,data)
+          .then((res) => {
+            if(res.data !== null){
+                swal({
+                    title: "Company Deleted Sucessfully",
+                    icon: "success",
+                });
+            }else{
+                swal({
+                    title: res.data,
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                })
+            }
+            this.componentWillMount();
+          })
+          .catch(error => console.error(error));
+    }
+
+
+    confiramtionPopup = (id) => {
+        swal({
+            title: "Are you sure ??",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.removeCompany(id);
+          } 
+        });
+    }    
     render(){
         return(
             <Page

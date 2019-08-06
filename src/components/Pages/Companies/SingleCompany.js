@@ -54,7 +54,8 @@ class SingleCompany extends React.Component{
             if(res.data !== null){
                 let companydetails = res.data;
                 this.setState({
-                    company_details : companydetails
+                    company_details : companydetails,
+                    machines: companydetails.machines
                 })
             }else{
                 console.warn("No data found");     
@@ -101,11 +102,9 @@ class SingleCompany extends React.Component{
         url = '/add_machine.php';
         backendActions(url,methodType,data)
           .then((res) => {
-            console.log(res);
             this.setState({
                 machine_name:''
             })
-            console.log(res.ifpresent);
             if(res.ifpresent !== 'Machine Already Present'){
                 swal({
                     title: res.ifpresent,
@@ -142,7 +141,6 @@ class SingleCompany extends React.Component{
 
         backendActions(url,methodType,data)
           .then((res) => {
-            console.log(res);
             this.setState({
                 companyname:''
             });
@@ -164,7 +162,6 @@ class SingleCompany extends React.Component{
         this.setState({
             machines: e.target.value
         })
-        console.log(this.state.machines);
 
     }
     updateMachines = () =>{
@@ -178,7 +175,6 @@ class SingleCompany extends React.Component{
         url = '/add_machine.php';
         backendActions(url,methodType,data)
           .then((res) => {
-            console.log(res);
             swal({
                 title: res.ifpresent,
                 icon: "success",
@@ -206,7 +202,7 @@ class SingleCompany extends React.Component{
                         </div>
                         <div className="col-6 text-right">
                             <button className="btn btn-danger mr-3" onClick={this.toggle1} > Edit Company</button>
-                            <button className="btn btn-info" onClick={this.toggle}><i className="fa fa-user"></i> Add Machine / Edit Machines</button>
+                            <button className="btn btn-info" onClick={this.toggle}><i className="fa fa-user"></i> Add Machine </button>
                         </div>
                     </div>
                     <hr className="my-2" />
