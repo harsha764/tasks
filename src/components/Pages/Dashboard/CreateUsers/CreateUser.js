@@ -2,7 +2,7 @@ import React from 'react';
 import Page from '../../../Breadcrumbs/Page';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { backendActions } from '../../../../helpers/ApiRequest';
-import { withRouter } from 'react-router';
+// import { withRouter } from 'react-router';
 import swal from 'sweetalert';
 
 class CreateUser extends React.Component{
@@ -78,4 +78,4 @@ class CreateUser extends React.Component{
     }
 }
 
-export default withRouter(CreateUser);
+export default CreateUser;

@@ -2,7 +2,7 @@ import React from 'react';
 import Page from '../../../Breadcrumbs/Page';
 import { backendActions } from '../../../../helpers/ApiRequest';
 import swal from 'sweetalert';
-import { withRouter } from 'react-router';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Form, FormGroup, Label, Input } from 'reactstrap';
 
 class ViewUser extends React.Component{
     constructor(props){
@@ -10,13 +10,26 @@ class ViewUser extends React.Component{
         this.state = {
             users:[],
             deleteId:'',
+            modal:false,
+            creatingFor:'',
+            createdBy: '',
+            companyName:''
         }
+        this.toggle = this.toggle.bind(this);
+
+    }
+    componentDidMount(){
+        let app = JSON.parse(localStorage.getItem('app'));
+        let username = app.name;
+        this.setState({
+            createdBy : username
+        })
+
     }
     componentWillMount(){
         let url;
         let methodType;
-        methodType = 'POST';
-
+        methodType = 'GET';
         url = '/get_users.php';
         backendActions(url,methodType)
           .then((res) => {
@@ -30,10 +43,15 @@ class ViewUser extends React.Component{
             }
           })
           .catch(error => console.error(error));
-
-
-      
     }
+
+    toggle = (email = '') => {
+        this.setState(prevState => ({
+          modal: !prevState.modal,
+          creatingFor:email 
+        }));
+      }
+
     removeUser = (userid) =>{
         let url;
         let methodType;
@@ -53,7 +71,6 @@ class ViewUser extends React.Component{
                     title: "User Deleted Sucessfully",
                     icon: "success",
                 });
-                // swal(res.data)
             }else{
                 swal({
                     title: res.data,
@@ -81,31 +98,33 @@ class ViewUser extends React.Component{
         });
     }    
 
-    viewUser = (userid) =>{
+    changeEvent =(e) =>{
+        // console.log(e.target.value);
+        this.setState({
+            companyName: e.target.value
+        })
+    }
+    addCompany = () =>{
         let url;
         let methodType;
         let data={};
-        data.id = userid;
-        url = '/view_user.php';
+        data.companyname = this.state.companyName;
+        data.createdby = this.state.createdBy;
+        data.createdfor = this.state.creatingFor;
+        data.type = 'Create Company';
+        url = '/create_company.php';
         methodType = 'POST';
-
         backendActions(url,methodType,data)
           .then((res) => {
-            if(res.data !== null){
-                console.log(res.data);
-            }else{
-                swal({
-                    title: res.data,
-                    icon: "error",
-                    buttons: true,
-                    dangerMode: true,
-                })
-            }
+            console.log(res);
+            this.toggle();
+            swal({
+                title: "Company Created Sucessfully",
+                icon: "success",
+            });
           })
           .catch(error => console.error(error));
     }   
-
-
     render(){
         return(
             <Page
@@ -136,15 +155,30 @@ class ViewUser extends React.Component{
                         <td>{i+1}</td>    
                         <td >{item.id}</td>
                         <td>{item.name}</td>
-                        <td className="actionbtn"><button className="btn btn-info" onClick={()=>this.viewUser(item.id)}>View</button> <button className="btn btn-danger" onClick={()=>this.confiramtionPopup(item.id)}>Delete</button></td>
+                        <td className="actionbtn"><button className="btn btn-info" onClick={() => this.toggle(item.name)}>Add Company</button> <button className="btn btn-danger" onClick={()=>this.confiramtionPopup(item.id)}>Delete</button></td>
                     </tr>
                 ))}
                 </tbody>
             </table>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <ModalHeader toggle={this.toggle}>Create Company</ModalHeader>
+                <ModalBody>
+                <Form>
+                    <FormGroup>
+                    <Label for="companyName">Name</Label>
+                    <Input type="text" name="companyName" id="companyName" placeholder="Enter Name of Company" onChange={this.changeEvent} />
+                    </FormGroup>
+                </Form>    
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={this.addCompany}>Create</Button>{' '}
+                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                </ModalFooter>
+            </Modal>
             </Page>
         )
     }
 
 }
 
-export default withRouter(ViewUser);
+export default ViewUser;

@@ -1,3 +1,2 @@
-import DashboardPage from './DashboardPage';
-
-export default DashboardPage;
+import Overview from './DashboardPage';
+export default Overview;
