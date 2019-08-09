@@ -16,7 +16,6 @@ class ViewUser extends React.Component{
             companyName:''
         }
         this.toggle = this.toggle.bind(this);
-
     }
     componentDidMount(){
         let app = JSON.parse(localStorage.getItem('app'));

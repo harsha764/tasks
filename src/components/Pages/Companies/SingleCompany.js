@@ -19,26 +19,7 @@ class SingleCompany extends React.Component{
         this.toggle1 = this.toggle1.bind(this);
     }
     componentWillMount(){
-        let url;
-        let methodType;
-        var data = {};        
-        data.rowid = this.props.match.params.id;
-        data.type = 'Single company';
-        methodType = 'POST';
-        url = '/get_companydetails.php';
-        backendActions(url,methodType,data)
-          .then((res) => {
-            if(res.data !== null){
-                let companydetails = res.data;
-                this.setState({
-                    company_details : companydetails,
-                    machines: companydetails.machines
-                })
-            }else{
-                console.warn("No data found");     
-            }
-          })
-          .catch(error => console.error(error));
+        this.getData();
     }
 
     getData = () =>{
