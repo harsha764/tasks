@@ -47,7 +47,7 @@ class AuthForm extends React.Component {
       data.type = 'signup';
       url = '/signup.php';
     }
-    backendActions(url,methodType, data)
+    backendActions(url, methodType, data)
       .then((data) => {
         var status = data.status;
         if (data.type === 'login') {

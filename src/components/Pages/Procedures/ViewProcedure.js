@@ -2,57 +2,57 @@ import React from 'react';
 import { backendActions } from '../../../helpers/ApiRequest';
 import Page from '../../Breadcrumbs/Page';
 
-class ViewProcedure extends React.Component{
-    constructor(){
+class ViewProcedure extends React.Component {
+    constructor() {
         super();
         this.state = {
             procedureName: '',
-            procedureDetails:[]
+            procedureDetails: []
         }
     }
-    componentWillMount(){
+    componentWillMount() {
         this.getData();
     }
-    getData = () =>{
+    getData = () => {
         let url;
         let methodType;
-        var data = {};        
+        var data = {};
         data.rowid = this.props.match.params.id;
         data.type = 'Single procedure';
         methodType = 'POST';
         url = '/get_procedure.php';
-        backendActions(url,methodType,data)
-          .then((res) => {
-            console.log(res.maindata);
-            console.log(res.procedure_details);
+        backendActions(url, methodType, data)
+            .then((res) => {
+                console.log(res.maindata);
+                console.log(res.procedure_details);
 
-            if(res.data !== null){
-                this.setState({
-                    procedureName :  res.maindata.name,
-                    procedureDetails: res.procedure_details
-                })
-            }else{
-                console.warn("No data found");     
-            }
-          })
-          .catch(error => console.error(error));
+                if (res.data !== null) {
+                    this.setState({
+                        procedureName: res.maindata.name,
+                        procedureDetails: res.procedure_details
+                    })
+                } else {
+                    console.warn("No data found");
+                }
+            })
+            .catch(error => console.error(error));
     }
 
     editProcedure = (id) => {
         console.log(id);
-        this.props.history.push('/dashboard/editprocedure/'+id);
+        this.props.history.push('/dashboard/editprocedure/' + id);
     }
 
-    render(){
-        
-        return(
+    render() {
+
+        return (
             <Page
-            className="SingleProcedure"
-            title="Procedure Details"
-            breadcrumbs={[{ name: 'SingleProcedure', active: true }]}
+                className="SingleProcedure"
+                title="Procedure Details"
+                breadcrumbs={[{ name: 'SingleProcedure', active: true }]}
             >
                 <h2 className="text-center">{this.state.procedureName}</h2>
-                { this.state.procedureDetails.map((item,i)=> (
+                {this.state.procedureDetails.map((item, i) => (
                     <div key={i}>
                         <p>{item.field_name} : {item.field_value}</p>
                     </div>

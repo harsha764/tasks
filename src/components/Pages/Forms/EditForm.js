@@ -117,7 +117,7 @@ class EditForm extends React.Component {
                             title: "Form Created Sucessfully",
                             icon: "success",
                         });
-                        this.props.history.push('/dashboard/view_form/'+ this.state.id);
+                        this.props.history.push('/dashboard/view_form/' + this.state.id);
                     } else {
                         swal({
                             title: "PLease try again",
@@ -139,7 +139,7 @@ class EditForm extends React.Component {
         let newobj = Object.assign({}, obj)
         delete newobj[fieldid]
         this.setState({
-            data:newobj
+            data: newobj
         })
     }
 
@@ -165,7 +165,7 @@ class EditForm extends React.Component {
                                 <FormGroup key={i} className="mt-3">
                                     <h4 htmlFor={`${key}`}>{`${key}`}</h4>
                                     <input name={`${key}`} ref={`${key}`} className={`${obj[key]}`} value={`${key}`} type={`${obj[key]}`} id={`${key}`} onChange={changeEvent} />
-                                    <button type="button" onClick={()=>deleteEvent(key)}>X</button>
+                                    <button type="button" onClick={() => deleteEvent(key)}>X</button>
                                 </FormGroup>
                             );
                         })}

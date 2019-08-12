@@ -19,9 +19,9 @@ class CreateForm extends React.Component {
     }
 
     changeEvent = (e) => {
-            this.setState({
-                [e.target.name]: e.target.value
-            })
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     addInput = () => {
@@ -35,7 +35,7 @@ class CreateForm extends React.Component {
                     [label]: type
                 }
             });
-           
+
             this.toggle();
         } else {
             swal("Please select the type of field ");
@@ -90,9 +90,9 @@ class CreateForm extends React.Component {
         let newobj = Object.assign({}, obj)
         delete newobj[keylabel]
         this.setState({
-            data:newobj
+            data: newobj
         })
-    }    
+    }
     render() {
         let obj = this.state.data;
         let removeItem = this.removeItem;
@@ -112,11 +112,11 @@ class CreateForm extends React.Component {
                 {
                     Object.keys(obj).map(function (key, i) {
                         return (
-                            <div key={i}>    
-                                <Fieldtype label={`${key}`} type={`${obj[key]}`}  />
+                            <div key={i}>
+                                <Fieldtype label={`${key}`} type={`${obj[key]}`} />
                                 <button className="d-inline-block" onClick={() => removeItem(key)}>X</button>
                             </div>
-                        ) 
+                        )
                     })}
                 {
                     Object.keys(obj).length !== 0 ?

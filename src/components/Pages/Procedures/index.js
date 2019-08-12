@@ -3,7 +3,7 @@ import AllProcedures from './AllProcedures';
 import ViewProcedure from './ViewProcedure';
 import EditProcedure from './EditProcedure';
 
-export{
+export {
     AddProcedure,
     AllProcedures,
     ViewProcedure,

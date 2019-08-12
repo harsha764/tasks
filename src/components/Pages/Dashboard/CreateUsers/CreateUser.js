@@ -5,26 +5,26 @@ import { backendActions } from '../../../../helpers/ApiRequest';
 // import { withRouter } from 'react-router';
 import swal from 'sweetalert';
 
-class CreateUser extends React.Component{
-    constructor(props){
+class CreateUser extends React.Component {
+    constructor(props) {
         super(props)
         this.state = {
-            username :'',
-            password :'',
-            errors :''
+            username: '',
+            password: '',
+            errors: ''
         }
     }
 
     changeEvent = (e) => {
         this.setState({
-          [e.target.name]: e.target.value
+            [e.target.name]: e.target.value
         });
     }
 
     handleSubmit = event => {
         event.preventDefault();
         let url;
-        var data = {};        
+        var data = {};
         let methodType;
 
         data.username = this.state.username;
@@ -32,47 +32,47 @@ class CreateUser extends React.Component{
         data.type = 'signup';
         methodType = 'POST';
         url = '/signup.php';
-        backendActions(url, methodType,data)
-          .then((data) => {
-            swal({
-                icon: "success",
-                title: "User Created Sucessfully"
-            });
-            this.setState({
-                username:'',
-                password:''
+        backendActions(url, methodType, data)
+            .then((data) => {
+                swal({
+                    icon: "success",
+                    title: "User Created Sucessfully"
+                });
+                this.setState({
+                    username: '',
+                    password: ''
+                })
             })
-          })
-          .catch(error => console.error(error));
-      };
+            .catch(error => console.error(error));
+    };
 
-    render(){
-        return(
+    render() {
+        return (
             <Page
-            className="CreateUser"
-            title="CreateUser"
-            breadcrumbs={[{ name: 'CreateUser', active: true }]}
+                className="CreateUser"
+                title="CreateUser"
+                breadcrumbs={[{ name: 'CreateUser', active: true }]}
             >
-            <Form onSubmit={this.handleSubmit} className="mt-3">    
-                <FormGroup>
-                    <Label for="username">Username</Label>
-                    <Input onChange={this.changeEvent} name="username" value={this.state.username} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="password">Password</Label>
-                    <Input onChange={this.changeEvent} name="password" value={this.state.password}/>
-                </FormGroup>
-                <FormGroup className="text-center" style={{ color: 'red' }}>
-                    <p>{this.state.errors}</p>
-                </FormGroup>
-                <Button
-                    size="lg"
-                    className="bg-gradient-theme-left border-0"
-                    block
-                    onClick={this.handleSubmit}>
-                    Create User
+                <Form onSubmit={this.handleSubmit} className="mt-3">
+                    <FormGroup>
+                        <Label for="username">Username</Label>
+                        <Input onChange={this.changeEvent} name="username" value={this.state.username} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Password</Label>
+                        <Input onChange={this.changeEvent} name="password" value={this.state.password} />
+                    </FormGroup>
+                    <FormGroup className="text-center" style={{ color: 'red' }}>
+                        <p>{this.state.errors}</p>
+                    </FormGroup>
+                    <Button
+                        size="lg"
+                        className="bg-gradient-theme-left border-0"
+                        block
+                        onClick={this.handleSubmit}>
+                        Create User
                 </Button>
-            </Form>    
+                </Form>
             </Page>
         )
     }

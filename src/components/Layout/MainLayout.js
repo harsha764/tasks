@@ -23,7 +23,7 @@ class MainLayout extends React.Component {
   componentDidMount() {
     this.checkBreakpoint(this.props.breakpoint);
   }
-   
+
   handleContentClick = event => {
     if (
       MainLayout.isSidebarOpen() &&

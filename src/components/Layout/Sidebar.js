@@ -103,7 +103,7 @@ class Sidebar extends React.Component {
               </NavItem>
             ))}
 
-           
+
 
             <NavItem
               className={bem.e('nav-item')}
@@ -183,7 +183,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse> 
+            </Collapse>
 
             <NavItem
               className={bem.e('nav-item')}
@@ -223,7 +223,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>     
+            </Collapse>
 
             <NavItem
               className={bem.e('nav-item')}
@@ -263,7 +263,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>       
+            </Collapse>
 
           </Nav>
         </div>
