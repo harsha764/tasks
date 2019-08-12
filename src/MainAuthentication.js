@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
-
 class MainAuthentication extends React.Component{
     componentDidMount(){
         let auth = JSON.parse(localStorage.getItem('app'));
