@@ -3,7 +3,6 @@ import Fieldtype from '../Procedures/FieldTypes';
 import Page from '../../Breadcrumbs/Page';
 import { backendActions } from '../../../helpers/ApiRequest';
 
-
 class ViewForm extends React.Component {
     constructor(){
         super();
