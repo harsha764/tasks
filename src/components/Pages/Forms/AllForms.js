@@ -1,6 +1,7 @@
 import React from 'react';
 import { backendActions } from '../../../helpers/ApiRequest';
 import Page from '../../Breadcrumbs/Page';
+import swal from 'sweetalert';
 
 
 class AllForms extends React.Component{
@@ -35,6 +36,50 @@ class AllForms extends React.Component{
     editForm = (id) => {
         this.props.history.push('/dashboard/edit_forms/'+id);
     }
+
+    viewForm = (id) => {
+        this.props.history.push('/dashboard/view_form/'+id);
+    }
+    removeForm = (id) => {
+        let url;
+        let methodType;
+        let data={};
+        data.id = id;
+        url = '/delete_form.php';
+        methodType = 'POST';
+
+        backendActions(url,methodType,data)
+          .then((res) => {
+            if(res.data !== null){
+                swal({
+                    title: "Form Deleted Sucessfully",
+                    icon: "success",
+                });
+            }else{
+                swal({
+                    title: res.data,
+                    icon: "error",
+                    buttons: true,
+                    dangerMode: true,
+                })
+            }
+        this.getForms();
+          })
+          .catch(error => console.error(error));
+    }
+    confiramtionPopup = (id) => {
+        swal({
+            title: "Are you sure ??",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.removeForm(id);
+          } 
+        });
+    }    
     render(){
         return(
             <Page
