@@ -6,6 +6,7 @@ import { AddProcedure, AllProcedures, ViewProcedure, EditProcedure } from '../Pa
 import { CreateForm, EditForm, AllForms, ViewForm } from '../Pages/Forms';
 import CreateUser from "../Pages/Dashboard/CreateUsers";
 import ViewUser from "../Pages/Dashboard/ViewUser";
+import Overview from "../Pages/Dashboard/Overview";
 
 class MainLayout extends React.Component {
   static isSidebarOpen() {
@@ -64,6 +65,7 @@ class MainLayout extends React.Component {
         <Sidebar />
         <Content fluid onClick={this.handleContentClick}>
           <Header />
+          <Route exact path="/dashboard" component={Overview} />
           <Route exact path="/dashboard/create_user" component={CreateUser} />
           <Route exact path="/dashboard/view_user" component={ViewUser} />
           <Route exact path="/dashboard/my_companies" component={MyCompanies} />
